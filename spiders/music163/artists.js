@@ -17,10 +17,11 @@ const fs = require('fs');
 // 获取网页并进行解析
 function getHtml(id, initial){
     let uri = 'https://music.163.com/discover/artist/cat?id='+ id + '&initial=' + initial;
-    let filePath = path.resolve(__dirname, 'data') + '/' + id + '_' + inital + '.csv';
-    // let filePath = path.resolve(__dirname, 'data') + '/' + 'artists.csv';
-    // 写入文件
-    let writer = fs.createWriteStream(filePath);
+    // let filePath = path.resolve(__dirname, 'data') + '/' + id + '_' + inital + '.csv';
+    let filePath = path.resolve(__dirname, 'data') + '/' + 'artists.csv';
+    
+    // 创建流对象
+    let writer = fs.createWriteStream(filePath, {flags: 'a'});
 
     request({url : uri,
 
