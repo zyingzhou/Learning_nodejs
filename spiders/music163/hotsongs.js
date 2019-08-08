@@ -14,10 +14,10 @@ const path = require('path');
 const fs = require('fs');
 
 
-var filePath = 'test.csv';
+var filePath = path.resolve(__dirname, 'data') + '/hotsong.csv';
 var writer = fs.createWriteStream(filePath);
 // 不是地址栏中的地址，需要在控制面板中查看
-// 林俊杰做演示
+// 林俊杰的热门歌曲
 var uri = 'https://music.163.com/artist?id=3684';
 request({url : uri,
 
@@ -45,7 +45,20 @@ request({url : uri,
             var chunk = songId + ',' + songName + ',' + songUrl + '\n';
             console.log(chunk);
             // 写入流
-            
+            writer.write(chunk, err=>{
+
+                if(err){
+
+                    // console.log('error');
+                    console.log('写入出错：\n', err);
+
+                }else{
+
+                    console.log('数据写入成功！');
+
+                    writer.end();
+                }
+            })
             })
             
         }
